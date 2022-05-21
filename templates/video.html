@@ -1,0 +1,43 @@
+<!-- index.html -->
+<video autoplay></video>
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Simplemeet</title>
+<link href="../static/css/media.css" rel="stylesheet" type="text/css"  />
+</head>
+<body>
+  <!-- <h1>基礎 getUserMedia 影音流播放控制</h1>
+  <hr/>
+  <video autoplay></video> -->
+  <!-- 取得media stream -->
+  <!-- <button onclick="onCapture()">Capture</button> -->
+  <!-- 停止media stream -->
+  <!-- <button onclick="stopMedia()">Stop</button> -->
+
+  <h1>RTCPeerConnection 範例</h1>
+    <div id="container">
+      <section>
+        <h1>PC 1 Tracker</h1>
+        <video id="localVideo" autoplay muted></video>
+      </section>
+      <section>
+        <h1>PC 2 Receiver</h1>
+        <video id="remoteVideo" autoplay></video>
+      </section>
+
+      <div class="box">
+        <button id="startButton">Start</button>
+        <button id="callButton">Call</button>
+        <button id="hangupButton">Hang Up</button>
+      </div>
+    </div>
+
+  <script src="https://webrtc.github.io/adapter/adapter-latest.js"></script>
+  <script src="../static/js/media.js"></script>
+
+</body>
+</html>

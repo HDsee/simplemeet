@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simplemeet</title>
+</head>
+<body>
+    <h1>Welcome to Simplemeet room {{room}}</h1>
+
+    <div id="messages"></div>
+
+    <form id="message_input_form">
+        <input type="text" id="message_input" placeholder="Enter your message">
+        <button type="submit">Send</button>
+    </form>
+</body>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"></script>
+<script src="../static/js/socket.js"></script>
+</html>
