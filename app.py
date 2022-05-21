@@ -35,4 +35,4 @@ def disconnect():
 	# socketio.stop() 
 
 if __name__ == '__main__':
-    socketio.run(app, port=3020, debug=True)
+    socketio.run(app,host='0.0.0.0', port=3020, debug=True)
