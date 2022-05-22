@@ -8,6 +8,10 @@ socketio = SocketIO(app)
 def home():
     return render_template("index.html")
 
+@app.route('/video')
+def video():
+    return render_template("video.html")
+
 @app.route('/chat')
 def chat():
     username = request.args.get('username')

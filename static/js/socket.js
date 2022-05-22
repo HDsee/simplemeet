@@ -10,19 +10,19 @@ socket.on('connect', function() {
         room: room
     })
 
-        let message_input = document.getElementById('message_input');
+    let message_input = document.getElementById('message_input');
     document.getElementById('message_input_form').onsubmit = function (e) {
-        e.preventDefault();
-        let message = message_input.value.trim();
-        if (message.length) {
-            socket.emit('send_message', {
-                username: username,
-                room: room,
-                message: message
-            })
-        }
-        message_input.value = '';
-        message_input.focus();
+    e.preventDefault();
+    let message = message_input.value.trim();
+    if (message.length) {
+        socket.emit('send_message', {
+            username: username,
+            room: room,
+            message: message
+        })
+    }
+    message_input.value = '';
+    message_input.focus();
     }
 });
 
@@ -60,3 +60,11 @@ socket.on('leave_room_announcement', function (data) {
     newNode.innerHTML = `<b>${data.username}</b> has left the room`;
     document.getElementById('messages').appendChild(newNode);
 });
+
+const videoBtn = document.getElementById('video');
+function videoPage(e){
+    e.preventDefault()
+    window.location.href='/video';
+}
+
+videoBtn.addEventListener('click', bookingPage)
