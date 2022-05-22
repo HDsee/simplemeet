@@ -67,4 +67,4 @@ function videoPage(e){
     window.location.href='/video';
 }
 
-videoBtn.addEventListener('click', bookingPage)
+videoBtn.addEventListener('click', videoPage)
