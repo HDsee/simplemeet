@@ -1,18 +1,31 @@
 from flask import *
 from flask_socketio import SocketIO, join_room, leave_room
-import cv2
+
+#import api
+from api.user import userApi 
 
 app = Flask(__name__)
-camera=cv2.VideoCapture(0)
 socketio = SocketIO(app)
+app.config["JSON_AS_ASCII"]=False
+app.config["TEMPLATES_AUTO_RELOAD"]=True
+app.config["JSON_SORT_KEYS"] = False #阻止json按照字母排序
 
-@app.route('/')
-def home():
-    return render_template("index.html")
+#註冊blueprint
+app.register_blueprint(userApi, url_prefix='/api')
+
+app.secret_key="HD"
+# Pages
+@app.route("/")
+def index():
+	return render_template("index.html")
+
+@app.route("/member")
+def member():
+	return render_template("member.html")
 
 @app.route('/video')
 def video():
-    return Response(generate_frames(),mimetype='multipart/x-mixed-replace; boundary=frame')
+    return render_template("video.html")	
 
 @app.route('/chat')
 def chat():
@@ -21,7 +34,7 @@ def chat():
     if username and room:
         return render_template('chat.html', username=username, room=room)
     else:
-        return redirect(url_for('home'))
+        return redirect(url_for('index'))
 
 @socketio.on('send_message')
 def handle_send_message_event(data):
@@ -40,18 +53,6 @@ def disconnect():
 	print("Client disconnected")
 	# socketio.stop() 
 
-def generate_frames():
-    while True:
-
-        ## read the camera frame
-        success,frame = camera.read()
-        if not success:
-            break
-        else:
-            ret,buffer = cv2.imencode('.jpg',frame)
-            frame = buffer.tobytes()
-        yield(b'--frame\r\n'
-                   b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')
 
 if __name__ == '__main__':
     socketio.run(app,host='0.0.0.0', port=3020, debug=True)

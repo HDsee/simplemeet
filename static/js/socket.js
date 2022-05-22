@@ -1,5 +1,5 @@
 // const socket = io.connect("http://127.0.0.1:3020");
-const socket = io.connect("http://52.68.132.15:3020");
+const socket = io.connect("http://52.192.9.247:3020");
 
 const username = document.URL.split('username=').slice(-1)[0];
 const room = document.URL.split('room=').slice(-1)[0];
