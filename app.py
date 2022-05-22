@@ -1,7 +1,9 @@
 from flask import *
 from flask_socketio import SocketIO, join_room, leave_room
+import cv2
 
 app = Flask(__name__)
+camera=cv2.VideoCapture(0)
 socketio = SocketIO(app)
 
 @app.route('/')
@@ -10,7 +12,7 @@ def home():
 
 @app.route('/video')
 def video():
-    return render_template("video.html")
+    return Response(generate_frames(),mimetype='multipart/x-mixed-replace; boundary=frame')
 
 @app.route('/chat')
 def chat():
@@ -37,6 +39,19 @@ def handle_join_room_event(data):
 def disconnect():
 	print("Client disconnected")
 	# socketio.stop() 
+
+def generate_frames():
+    while True:
+
+        ## read the camera frame
+        success,frame = camera.read()
+        if not success:
+            break
+        else:
+            ret,buffer = cv2.imencode('.jpg',frame)
+            frame = buffer.tobytes()
+        yield(b'--frame\r\n'
+                   b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')
 
 if __name__ == '__main__':
     socketio.run(app,host='0.0.0.0', port=3020, debug=True)
