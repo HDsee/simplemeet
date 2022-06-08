@@ -1,16 +1,78 @@
-<!-- index.html -->
-<video autoplay></video>
-
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Simplemeet</title>
+<title>simplemeet</title>
+<script src="https://kit.fontawesome.com/647c2fadc1.js" crossorigin="anonymous"></script>
+<link href="/static/css/member.css" rel="stylesheet" type="text/css"  />
 </head>
 <body>
-   <h1>waitting to build...</h1>
-   
+    <nav>
+        <div></div>
+        <div class="top">
+            <a class="webname" href="/">simplemeet</a>
+            <div id="book" class="signin show" >Member</div>
+            <div id="sign-btn" class="signin show" >Sign in/Sign up</div>
+            <div id="signout-btn"class="signin" >Sign out</div>
+        </div>    
+        <div></div>
+    </nav>
+    <Section class="sign-window">
+        <div class="sign-container show">   
+            <div class="form-container" >
+                <form id="signin">
+                    <h3 class="form-title">Sign in member
+                        <div class="close-btn">✕</div>
+                    </h3>
+                    <div class="form-content">
+                        <input type="email" placeholder="Tpye Email" name="email" required>
+                        <input type="password" placeholder="Type Password" name="password" required>
+                        <button type="submit">Sign in</button>
+                    </div>
+                    <p class="message"></p>
+                    <p class="change-sign">Create a new account</p>
+                </form>
+            </div>     
+        </div>
+        <div class="sign-container">
+            <div class="form-container">
+                <form id="signup">
+                    <h3 class="form-title">Create account
+                        <div class="close-btn">✕</div>
+                    </h3>
+                    <div class="form-content">
+                        <input type="text" placeholder="Type Name" name="name" required>
+                        <input type="email" placeholder="Type Email" name="email" required>
+                        <input type="password" placeholder="Type Password" name="password" required>
+                        <button type="submit">Sign up</button>
+                    </div>
+                    <p class="message"></p>
+                    <p class="change-sign">Sign in account</p>
+                </form>
+            </div>     
+        </div>
+    </Section>
+    <div class="up-seperator"></div>
+    <div class="form-memberdata">
+      <form id="member-data">
+          <h3 class="form-title">Member Profile</h3>
+          <p id="user-name"></p>
+          <p id="user-email"></p>
+          <div class="form-content">
+            <div>New name：  
+            <input type="text" placeholder="Type New Name" name="name" required>
+            </div>
+            <div>New password：
+            <input type="password" placeholder="Type New Password" name="password" required>
+            </div>
+            <button type="submit">Save</button>
+          </div>
+          <p class="message"></p>
+      </form>
+  </div>     
+    <script src="/static/js/sign.js"></script>
+    <script src="/static/js/member.js"></script>
 
 </body>
 </html>

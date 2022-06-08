@@ -107,7 +107,8 @@ function signout(){
         method: 'DELETE'
     })
     .then(() => {
-        history.go(0)
+        // history.go(0)
+        window.location.href='/'
     })
 
 }
@@ -146,3 +147,4 @@ function bookingPage(e){
 }
 
 bookingPageBtn.addEventListener('click', bookingPage)
+

@@ -1,0 +1,29 @@
+.up-seperator{
+    width: 100%;
+    height: 1px;
+    margin: 0;
+    background-color: #e8e8e8;
+}
+
+body{
+    font-family: 'Noto Sans TC';
+    background-color: #fefae0;
+}
+
+button{
+    height: 22px;
+    width: 100px;
+}
+
+.welcome{
+    color: #d4a373;
+}
+
+.input_form{
+    margin-right: 5px;
+}
+
+.button_container{
+    display:flex;
+    margin-top: 5px;
+}
