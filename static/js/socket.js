@@ -104,8 +104,14 @@ socket.on('leave_room_announcement', function(data){
 
 leaveBtn.addEventListener('click', leave)
 
+socket.on('leave_room_announcement', function(data){
+    console.log(data);
+    // const newNode = document.createElement('div');
+    // newNode.innerHTML = `<b>${data.username}</b> has left the room`;
+    // document.getElementById('messages').appendChild(newNode);
+})
 
-window.addEventListener('beforeunload', leave);
+// window.addEventListener('beforeunload', leave);
 
 // window.onbeforeunload = function () {
 //     socket.emit('leave_room', {

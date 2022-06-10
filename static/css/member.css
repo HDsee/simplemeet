@@ -110,7 +110,7 @@ nav{
     border-radius: 6px 6px 0 0 ;
 }
 
-.form-memberdata{
+.form-memberdata,.form-friden-search{
     width: 50%;
     margin: 0 auto;
     padding: 25px;

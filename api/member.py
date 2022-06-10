@@ -29,11 +29,9 @@ connection_pool = pooling.MySQLConnectionPool(pool_name="db",
 
 
 memberApi = Blueprint( 'memberApi', __name__)
+friendApi = Blueprint( 'friendApi', __name__)
 
-
-
-
-# 註冊功能
+# 會員資料修改
 @memberApi.route('/member', methods=['POST'])
 def memberupdate():
     try:
@@ -43,12 +41,14 @@ def memberupdate():
         password = data['password']
         db=connection_pool.get_connection()
         cursor = db.cursor()
-        cursor.execute('select * from `member` where name=%s',(email,))
-        email = cursor.fetchone()
+        cursor.execute('select * from `member` where name=%s',(name,))
+        userName = cursor.fetchone()
 
         #驗證資料
-        if (name != None) and (password != None):
+        if (not userName ) and (password != None) and (name != None):
             cursor.execute('UPDATE `member` SET name =%s, password=%s WHERE email = %s',(name,password,email))
+            cursor.execute('UPDATE `friends` SET name =%s WHERE email = %s',(name,email)) 
+            cursor.execute('UPDATE `friends` SET friendname =%s WHERE friendemail = %s',(name,email))
             data = {"ok": True}
             session['user'] = name
             return jsonify(data), 200
@@ -57,7 +57,7 @@ def memberupdate():
         else:
             data = {
                 "error": True,
-                "message": "修改失敗，請輸入姓名、密碼"
+                "message": "修改失敗，重複的姓名"
             }
             db.rollback()
             return jsonify(data), 400
@@ -74,5 +74,89 @@ def memberupdate():
         db.commit()
         cursor.close()
         db.close()
+
+
+# 會員資料比對
+@memberApi.route('/member', methods=['PATCH'])
+def memberget():
+    try:
+        data = request.json
+        email = data['email']
+        db=connection_pool.get_connection()
+        cursor = db.cursor()
+        if (email != session['email']):
+            cursor.execute('select * from `member` where email=%s',(email,))
+            user = cursor.fetchone()
+            if ( user ):
+                print(user[1])
+                data = {
+                    "user": user[1],
+                    "email": email
+                }
+                return jsonify(data)
+            else:
+                data = {
+                    "error": True,
+                    "message": "未註冊的email"
+                }
+                return jsonify(data), 400
+        else:
+            data = {
+                "error": True,
+                "message": "Dont enter your email !!"
+            }
+            return jsonify(data), 400
+    # 伺服器錯誤
+    except Exception as e:
+        print(e)
+        data = {
+            "error": True,
+            "message": "伺服器內部錯誤"
+        }
+        return jsonify(data), 500
+    finally:
+        cursor.close()
+        db.close()
+
     
 
+# 好友資料增加
+@friendApi.route('/member', methods=['POST'])
+def joinfiend():
+    try:
+        data = request.json
+        name = session['user']
+        email = session['email']
+        friendname = data['name']
+        friendemail = data['email']
+        db=connection_pool.get_connection()
+        cursor = db.cursor()
+        cursor.execute('select frinedname from `friends` where email=%s and friendemail=%s',(email,friendemail))
+        friend = cursor.fetchone()
+
+        #驗證資料
+        if (friend != friendname ):
+            print(friend)
+            data = {"ok": True}
+            session['user'] = name
+            return jsonify(data), 200
+            
+        # 好友重複
+        else:
+            data = {
+                "error": True,
+                "message": "好友添加失敗，已經成為好友"
+            }
+            return jsonify(data), 400
+
+    # 伺服器錯誤
+    except:
+        data = {
+            "error": True,
+            "message": "伺服器內部錯誤"
+        }
+        return jsonify(data), 500
+    finally:
+        db.commit()
+        cursor.close()
+        db.close()

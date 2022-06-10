@@ -1,12 +1,11 @@
 from flask import *
 from flask_socketio import SocketIO, join_room, leave_room
-import eventlet
-import eventlet.wsgi
 
 #import api
 from api.user import userApi 
 from api.joinroom import joinroomApi
 from api.member import memberApi
+from api.member import friendApi
 
 app = Flask(__name__)
 socketio = SocketIO(app, cors_allowed_origins="*",engineio_logger=True, logger=True)
@@ -18,6 +17,7 @@ app.config["JSON_SORT_KEYS"] = False #阻止json按照字母排序
 app.register_blueprint(userApi, url_prefix='/api')
 app.register_blueprint(joinroomApi, url_prefix='/api')
 app.register_blueprint(memberApi, url_prefix='/api')
+app.register_blueprint(friendApi, url_prefix='/api')
 
 app.secret_key="HD"
 # Pages
@@ -37,6 +37,11 @@ def video():
 def chat():
     return render_template('chat.html')
 
+
+
+
+users = {}
+
 @socketio.on('send_message')
 def handle_send_message_event(data):
     app.logger.info("{} has sent message to the room {}: {}".format(data['username'],data['room'],data['message']))
@@ -47,6 +52,7 @@ def handle_send_message_event(data):
 def handle_join_room_event(data):
     app.logger.info("{} has joined the room {}".format(data['username'], data['room']))
     join_room(data['room'])
+    users[session['user']] = request.sid
     socketio.emit('join_room_announcement', data, room=data['room'])
 
 @socketio.on('leave_room')
@@ -57,10 +63,11 @@ def handle_leave_room_event(data):
 
 @socketio.on('disconnect')
 def disconnect():
-	print("Client disconnected")
-	# app.logger.info("{} has left the room {}".format(data['username'], data['room']))
-    # leave_room(data['room'])
-    # socketio.emit('leave_room_announcement', data, room=data['room'])
+    del users[session['user']]
+    print(users,'OK')
+# 	app.logger.info("{} has disconnect {}".format(session['user'], session['room']))
+#     disconnect(data)
+#     socketio.emit('leave_room_announcement', data, room=session['room'])
 
 
 if __name__ == '__main__':

@@ -4,7 +4,6 @@ import mysql.connector
 from mysql.connector import pooling
 import re
 import boto3
-from api.mysql import db
 
 # 讀取.env的隱藏資料
 from dotenv import load_dotenv

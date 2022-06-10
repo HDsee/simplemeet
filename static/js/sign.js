@@ -41,6 +41,7 @@ const userApi = '/api/user'
 //註冊功能
 function signup(e){
     e.preventDefault()
+
     const data = {
         name : this.querySelector('input[name="name"]').value,
         email : this.querySelector('input[name="email"]').value,
@@ -103,6 +104,7 @@ signinForm.addEventListener('submit', signin)
 
 //登出
 function signout(){
+
     fetch(userApi, {
         method: 'DELETE'
     })
@@ -116,6 +118,7 @@ signoutBtn.addEventListener('click', signout)
 
 //檢查有沒有登入
 function userCheck(){
+
     fetch(userApi)
         .then(res => res.json())
         .then(data => {

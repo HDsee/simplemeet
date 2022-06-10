@@ -4,6 +4,7 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>simplemeet</title>
+<script src="https://kit.fontawesome.com/647c2fadc1.js" crossorigin="anonymous"></script>
 <link href="/static/css/index.css" rel="stylesheet" type="text/css"  />
 </head>
 <body>
@@ -19,7 +20,6 @@
     </nav>
     <Section class="sign-window">
         <div class="sign-container show">   
-            <!-- <div class="top-bar"></div> -->
             <div class="form-container" >
                 <form id="signin">
                     <h3 class="form-title">Sign in member
@@ -36,7 +36,6 @@
             </div>     
         </div>
         <div class="sign-container">
-            <!-- <div class="top-bar"></div> -->
             <div class="form-container">
                 <form id="signup">
                     <h3 class="form-title">Create account
@@ -62,6 +61,10 @@
                 <input type="text" name="room" required>
                 <button type="submit">Join</button>
             </div>
+        </form>
+        <form>
+            <input type="text" name="search" placeholder="輸入景點名稱查詢">
+            <button type="submit"><i class="fas fa-search"></i></button>
         </form>
         <form action="/video">
             <button type="click">video</button>
