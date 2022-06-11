@@ -4,7 +4,6 @@ import mysql.connector
 from mysql.connector import pooling
 import re
 import boto3
-from api.mysql import db
 
 # 讀取.env的隱藏資料
 from dotenv import load_dotenv
@@ -20,7 +19,7 @@ s3ID = os.getenv("s3ID")
 s3Key = os.getenv("s3Key")
 
 connection_pool = pooling.MySQLConnectionPool(pool_name="db",
-                                            pool_size=10,
+                                            pool_size=5,
                                             pool_reset_session=True,
                                             host=rdsHost,
                                             database=rdsDatabease,
@@ -65,13 +64,13 @@ def signup():
         cursor = db.cursor()
         cursor.execute('select * from `member` where email=%s',(email,))
         user = cursor.fetchone()
-
         #驗證資料
         if (not user) and (name != None) and (password != None):
             pattern = r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b'
             if re.fullmatch(pattern, email):
                 cursor.execute('select * from `member` where name=%s',(name,))
                 userName = cursor.fetchone()
+                print(name,email,password)
                 if(not userName):
                     cursor.execute('INSERT INTO `member` (name,email,password) VALUES (%s,%s,%s)',(name,email,password))
                     data = {"ok": True}
@@ -96,6 +95,7 @@ def signup():
                 "error": True,
                 "message": "註冊失敗，重複的email"
             }
+            db.rollback()
             return jsonify(data), 400
 
     # 伺服器錯誤

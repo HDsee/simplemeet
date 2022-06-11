@@ -25,7 +25,7 @@ memberGet()
 
 const memberForm = document.querySelector('#member-data')
 const memberApi = '/api/member'
-const friendApi = '/api/member'
+const friendApi = '/api/friend'
 
 
 //會員資料修改

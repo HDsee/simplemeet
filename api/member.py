@@ -1,3 +1,4 @@
+from traceback import print_tb
 from flask import *
 from flask import session
 import mysql.connector
@@ -19,7 +20,7 @@ s3ID = os.getenv("s3ID")
 s3Key = os.getenv("s3Key")
 
 connection_pool = pooling.MySQLConnectionPool(pool_name="db",
-                                            pool_size=10,
+                                            pool_size=5,
                                             pool_reset_session=True,
                                             host=rdsHost,
                                             database=rdsDatabease,
@@ -107,8 +108,7 @@ def memberget():
             }
             return jsonify(data), 400
     # 伺服器錯誤
-    except Exception as e:
-        print(e)
+    except :
         data = {
             "error": True,
             "message": "伺服器內部錯誤"
@@ -121,7 +121,7 @@ def memberget():
     
 
 # 好友資料增加
-@friendApi.route('/member', methods=['POST'])
+@friendApi.route('/friend', methods=['POST'])
 def joinfiend():
     try:
         data = request.json
@@ -131,30 +131,30 @@ def joinfiend():
         friendemail = data['email']
         db=connection_pool.get_connection()
         cursor = db.cursor()
-        cursor.execute('select frinedname from `friends` where email=%s and friendemail=%s',(email,friendemail))
+        cursor.execute('select friendname from `friends` where email=%s and friendemail=%s',(email,friendemail))
         friend = cursor.fetchone()
-
-        #驗證資料
-        if (friend != friendname ):
-            print(friend)
+        #添加好友
+        if (not friend  ):
+            cursor.execute('INSERT INTO `friends` (email,name,friendemail,friendname) VALUES (%s,%s,%s,%s)',(email,name,friendemail,friendname))
             data = {"ok": True}
-            session['user'] = name
             return jsonify(data), 200
-            
         # 好友重複
-        else:
+        elif (friend[0] == friendname):
             data = {
                 "error": True,
                 "message": "好友添加失敗，已經成為好友"
             }
+            db.rollback()
             return jsonify(data), 400
 
     # 伺服器錯誤
-    except:
+    except Exception as e:
+        print(e)
         data = {
             "error": True,
             "message": "伺服器內部錯誤"
         }
+        db.rollback()
         return jsonify(data), 500
     finally:
         db.commit()
