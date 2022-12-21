@@ -1,6 +1,6 @@
-const userName = document.querySelector('#user-name')
-const userEmail = document.querySelector('#user-email')
-
+const memberName =  document.querySelector('#member_name')
+const memberEmail = document.querySelector('#member_email')
+const memberImg = document.querySelector('.member_img')
 let nowEmail
 
 
@@ -10,8 +10,9 @@ function memberGet(){
         .then(res => res.json())
         .then(data => {
             if(data.data != null ){
-                userName.innerText = `Member Name：${data.data.user}`
-                userEmail.innerText = `Member Email：${data.data.email}`
+                memberName.innerText = `Member Name：${data.data.user}`
+                memberEmail.innerText = `Member Email：${data.data.email}`
+                memberImg.src = `${data.data.img}`
                 nowEmail = data.data.email
             }
             else{
@@ -19,13 +20,11 @@ function memberGet(){
             }
         })
 }
-
+ 
 memberGet()
 
 
-const memberForm = document.querySelector('#member-data')
-const memberApi = '/api/member'
-const friendApi = '/api/friend'
+const memberForm = document.querySelector('#member_data')
 
 
 //會員資料修改
@@ -59,71 +58,40 @@ function memberupdate(e){
 
 
 memberForm.addEventListener('submit', memberupdate)
+const imgApi = '/api/img'
 
+//更換大頭貼
+const memberImgChangeBtn = document.querySelector('#member_img_change_btn');
+const file = document.getElementById('select_file');
 
-const friendSearchForm = document.querySelector('#firend-search')
-const friendNameText = document.querySelector('#friend-name')
+let imgData = new FormData();
+let image = "";
+file.addEventListener('change', (e) => {
+    image = e.target.files[0];
+});   
 
-let friendName 
-let friendEmail
-//好友資料查詢
-function friendSearch(e){
-    e.preventDefault()
+function memberImgChange(e){
 
-    const data = {
-        email : this.querySelector('input[name="search"]').value,
-    }
-    fetch(memberApi, {
-        method: 'PATCH',
-        body: JSON.stringify(data),
-        headers: new Headers({
-        'Content-Type': 'application/json'
+    if(image !== ""){
+        console.log(image);
+        imgData.append('file', image);
+        
+        fetch(imgApi, {
+            method: 'POST',
+            body: imgData,
         })
-    })
-    .then(res => res.json())
-    .then(data => {
-        console.log(data)
-        if(data.user ){
-            friendNameText.innerText = data.user
-            friendName = data.user
-            friendEmail = data.email
-        }
-        else{
-            console.log(data)
-            friendNameText.innerText = data.message
-        }
-    })
+        .then(res => res.json())
+        .then(data => {
+            if(data.ok){
+                alert('修改成功')
+                history.go(0)
+            }else{
+                alert('修改失敗')
+            }
+        })
+    }else{
+        alert("請選擇圖片");
+    }
 }
 
-friendSearchForm.addEventListener('submit', friendSearch)
-
-const joinFriendBtn = document.querySelector('#join-friend-button')
-const joinFriendMes = document.querySelector('#join-friend-message')
-//好友資料增加
-function joinfriend(e){
-    e.preventDefault()
-    const data = {
-        email : friendEmail,
-        name : friendName
-    }
-    console.log(data)
-    fetch(friendApi, {
-        method: 'POST',
-        body: JSON.stringify(data),
-        headers: new Headers({
-        'Content-Type': 'application/json'
-        })
-    })
-    .then(res => res.json())
-    .then(data => {
-        const message = this.querySelector('.message')
-        if(data.ok){
-            joinFriendMes.innerText = '好友添加成功'
-        }else{
-            joinFriendMes.innerText = data.message
-        }
-    })
-}
-
-
-joinFriendBtn.addEventListener('click', joinfriend)
+memberImgChangeBtn.addEventListener('click', memberImgChange)

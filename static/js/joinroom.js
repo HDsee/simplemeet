@@ -10,30 +10,14 @@ function joinroom(e){
         .then(data => {
             // 有登入
             if(data.data !== null){
-                const data = {
-                    room : this.querySelector('input[name="room"]').value,
-                }
-                fetch(joinroomApi, {
-                    method: 'PATCH',
-                    body: JSON.stringify(data),
-                    headers: new Headers({
-                      'Content-Type': 'application/json'
-                    })
-                })
-                .then(res => res.json())
-                .then(data => {
-                    if(data.ok){
-                        window.location.href='/chat';
-                    }else{
-                        window.location.href='/';
-                    }
-                })
+                window.location.href='/chat';
             }else{  // 沒登入
-                showSignWindow()
+                window.location.href='/';
             }
         })
 }
 
 joinRoomForm.addEventListener('submit', joinroom)
+
 
 

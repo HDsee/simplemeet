@@ -3,12 +3,6 @@ html {
     height: 100%;
 }
 
-/* button{
-    background: none;
-    border: none;
-    outline: none;
-} */
-
 *, *:before, *:after {
     box-sizing: inherit;
     padding: 0;
@@ -20,40 +14,6 @@ body{
     width: 100%;
     font-family: 'Noto Sans TC';
     background-color: #fefae0;
-}
-
-nav{
-    display: grid;
-    grid-template-columns: 1fr;
-}
-
-.top{
-    display: grid;
-    grid-template-columns: 1fr 84px 150px;
-}
-
-.webname{
-    width: 150px;
-    font-weight: 700;
-    font-size: 30px;
-    font-style: normal;
-    line-height: 34px;
-    margin:10px 0px ;
-    text-decoration: none;
-    color: #d4a373;
-}
-
-.book{
-    width: 64px;
-    font-weight: 400;
-    font-size: 16px;
-    font-style: normal;
-    margin:20px 10px ;
-    text-align: center;
-    line-height: 14px;
-    text-decoration: none;
-    color: #666666;
-    justify-content:center;
 }
 
 .signin{
@@ -75,84 +35,73 @@ nav{
     display: block;
 }
 
+.index_img{
+    margin: 80px 40px 80px auto;
+    width: 600px;
+    height: 450px;
+    object-fit: cover;
+    border-radius: 20px;
+}
+
 /*註冊跟登入視窗*/
-.sign-window{
-    position: fixed;
+.sign_window{
     width: 100%;
     height: 100vh;
-    z-index: 3;
-    top: 0;
-    left: 0;
-    background: rgba(0, 0, 0, 0.25);
-    display: none;
+    display: flex;
+    justify-items: center;
+    align-items: center;
 }
 
-.sign-window.show{
-    display: block;
-}
-
-.sign-container{
+.sign_container{
     display:none;
     width: 340px;
     height: 275px;
-    margin: 80px auto;
+    margin: 120px auto 120px 50px;
     background: #ffffff;
     border-radius: 6px;
+    -webkit-filter: drop-shadow(12px 12px 7px rgba(0, 0, 0, 0.7));
+    filter: drop-shadow(12px 12px 7px rgba(0, 0, 0, 0.7))
 }
-.sign-container.show{
+.sign_container.show{
     display: block;
 }
 
-.top-bar{
-    width: 100%;
-    height: 10px;
-    background: linear-gradient(270deg, #337788 0%, #66AABB 100%);
-    border-radius: 6px 6px 0 0 ;
-}
-
-.form-container{
+.form_container{
     padding: 25px;
     text-align: center;
-    background-color: #faedcd;
+    background-color: #f9f5ea;
     border-radius: 6px 6px 6px 6px;
 }
-.form-title{
+.form_title{
     position: relative;
     color: #666666;
     margin-bottom: 15px;
     font-size: 24px;
 }
 
-.close-btn{
-    position: absolute;
-    line-height: 16px;
-    width: 16px;
-    top: 7px;
-    right: 7px;
-    cursor: pointer;
-}
 
-.form-content>*{
+
+.form_content>*{
     width: 100%;
     height: 47px;
-    border-radius: 5px;
     margin-bottom: 10px;
     border-color: #cccccc;
     border-style: solid;
     border-width: 1px;
+    border-radius: 5px;
 }
 
-.form-content>input::placeholder{
+.form_content>input::placeholder{
     color: #666666;
     font-size: 16px;
 }
 
-.form-content>button{
+.form_content>button{
     color: #ffffff;
     width: 100%;
     height: 47px;
     font-size: 19px;
-    background: #d4a373;
+    background: #edccab;
     border: 0;
     cursor: pointer;
 }
@@ -161,22 +110,27 @@ nav{
 color: red;
 }
 
-.change-sign{
+.change_sign{
     font-weight: bold;
     font-family: 'Noto Sans TC';
     color: #666666;
     cursor: pointer;
     margin: 0 auto;
+    border-radius: 5px;
 }
 
-.up-seperator{
+.change_sign:hover{
+    background-color: white;
+}
+
+.up_seperator{
     width: 100%;
     height: 1px;
     margin: 0;
     background-color: #e8e8e8;
 }
 
-.form-join{
+.form_join{
     text-align: center;
     margin-top: 10px;
 }

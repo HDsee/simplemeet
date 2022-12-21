@@ -3,12 +3,6 @@ html {
     height: 100%;
 }
 
-/* button{
-    background: none;
-    border: none;
-    outline: none;
-} */
-
 *, *:before, *:after {
     box-sizing: inherit;
     padding: 0;
@@ -76,7 +70,7 @@ nav{
 }
 
 /*註冊跟登入視窗*/
-.sign-window{
+.sign_window{
     position: fixed;
     width: 100%;
     height: 100vh;
@@ -87,11 +81,11 @@ nav{
     display: none;
 }
 
-.sign-window.show{
+.sign_window.show{
     display: block;
 }
 
-.sign-container{
+.sign_container{
     display:none;
     width: 340px;
     height: 275px;
@@ -99,25 +93,25 @@ nav{
     background: #ffffff;
     border-radius: 6px;
 }
-.sign-container.show{
+.sign_container.show{
     display: block;
 }
 
-.top-bar{
+.top_bar{
     width: 100%;
     height: 10px;
     background: linear-gradient(270deg, #337788 0%, #66AABB 100%);
     border-radius: 6px 6px 0 0 ;
 }
 
-.form-memberdata,.form-friden-search{
+.form_memberdata{
     width: 50%;
     margin: 0 auto;
     padding: 25px;
     background-color: #faedcd;
     border-radius: 6px 6px 6px 6px;
 }
-.form-title{
+.form_title{
     text-align: center;
     position: relative;
     color: #666666;
@@ -131,7 +125,7 @@ p{
     margin-bottom: 10px;
 }
 
-.form-content>div>input{
+.form_content>div>input{
     border-radius: 5px;
     margin-bottom: 10px;
     border-color: #cccccc;
@@ -139,17 +133,17 @@ p{
     border-width: 1px;
 }
 
-.form-content>div{
+.form_content>div{
     color: #666666;
     font-size: 16px;
 }
 
-.form-content>input::placeholder{
+.form_content>input::placeholder{
     color: #666666;
     font-size: 16px;
 }
 
-.form-content>button{
+.form_content>button{
     color: #ffffff;
     width: 100%;
     height: 47px;
@@ -163,7 +157,7 @@ p{
 color: red;
 }
 
-.change-sign{
+.change_sign{
     font-weight: bold;
     font-family: 'Noto Sans TC';
     color: #666666;
@@ -171,7 +165,7 @@ color: red;
     margin: 0 auto;
 }
 
-.up-seperator{
+.up_seperator{
     width: 100%;
     height: 1px;
     margin: 0;

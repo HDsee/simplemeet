@@ -1,35 +1,11 @@
 from flask import *
 from flask import session
-import mysql.connector
-from mysql.connector import pooling
+from connector import connection_pool
+
 import re
-import boto3
-
-# 讀取.env的隱藏資料
-from dotenv import load_dotenv
-import os
-
-
-load_dotenv()
-rdsHost = os.getenv("rdsHost")
-rdsDatabease = os.getenv("rdsDatabase")
-rdsUser = os.getenv("rdsUser")
-rdsPassword = os.getenv("rdsPassword")
-s3ID = os.getenv("s3ID")
-s3Key = os.getenv("s3Key")
-
-connection_pool = pooling.MySQLConnectionPool(pool_name="db",
-                                            pool_size=5,
-                                            pool_reset_session=True,
-                                            host=rdsHost,
-                                            database=rdsDatabease,
-                                            user=rdsUser,
-                                            password=rdsPassword,
-                                            port=3306)
 
 
 userApi = Blueprint( 'userApi', __name__)
-
 
 #取得當前使用者資訊
 @userApi.route('/user', methods=['GET'])
@@ -39,11 +15,13 @@ def api_user():
         id = session['id']
         user = session['user']
         email = session['email']
+        img = session['img']
         data = {
             "data":{
                 "id":id,
                 "user":user,
-                "email":email
+                "email":email,
+                "img":img
             }
         }
         return jsonify(data)
@@ -60,7 +38,8 @@ def signup():
         name = data['name']
         email = data['email']
         password = data['password']
-        db=connection_pool.get_connection()
+        img = data['img']
+        db = connection_pool.get_connection()
         cursor = db.cursor()
         cursor.execute('select * from `member` where email=%s',(email,))
         user = cursor.fetchone()
@@ -72,7 +51,7 @@ def signup():
                 userName = cursor.fetchone()
                 print(name,email,password)
                 if(not userName):
-                    cursor.execute('INSERT INTO `member` (name,email,password) VALUES (%s,%s,%s)',(name,email,password))
+                    cursor.execute('INSERT INTO `member` (name,email,password,img) VALUES (%s,%s,%s,%s)',(name,email,password,img))
                     data = {"ok": True}
                     return jsonify(data), 200
                 else:
@@ -119,7 +98,7 @@ def signin():
         data = request.json
         email = data['email']
         password = data['password']
-        db=connection_pool.get_connection()
+        db = connection_pool.get_connection()
         cursor = db.cursor()
         pattern = r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b'
         if (re.fullmatch(pattern, email)) and (password != None):
@@ -130,6 +109,7 @@ def signin():
                 session['id'] = user[0]
                 session['user'] = user[1]
                 session['email'] = user[2]
+                session['img'] = user[4]
                 data = {"ok": True}
                 return jsonify(data)
             # 登入失敗

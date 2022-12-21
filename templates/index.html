@@ -8,71 +8,66 @@
 <link href="/static/css/index.css" rel="stylesheet" type="text/css"  />
 </head>
 <body>
-    <nav>
+    <!-- <nav>
         <div></div>
         <div class="top">
             <a class="webname" href="/">simplemeet</a>
             <div id="book" class="signin show" >Member</div>
-            <div id="sign-btn" class="signin show" >Sign in/Sign up</div>
-            <div id="signout-btn"class="signin" >Sign out</div>
+            <div id="sign_btn" class="signin show" >Sign in/Sign up</div>
+            <div id="signout_btn"class="signin" >Sign out</div>
         </div>    
         <div></div>
-    </nav>
-    <Section class="sign-window">
-        <div class="sign-container show">   
-            <div class="form-container" >
+    </nav> -->
+    <Section class="sign_window" >
+        <img class="index_img" src="https://d2xfotk02kb3rl.cloudfront.net/chat.jpg" >
+        <div class="sign_container show">   
+            <div class="form_container" >
                 <form id="signin">
-                    <h3 class="form-title">Sign in member
-                        <div class="close-btn">✕</div>
+                    <h3 class="form_title">Sign in<br/>
+                        using your account
                     </h3>
-                    <div class="form-content">
-                        <input type="email" placeholder="Tpye Email" name="email" required>
-                        <input type="password" placeholder="Type Password" name="password" required>
+                    <div class="form_content">
+                        <input id="testemail" type="email" placeholder="Type Email" name="email" required>
+                        <input id="testpassword" type="password" placeholder="Type Password" name="password" required>
                         <button type="submit">Sign in</button>
                     </div>
                     <p class="message"></p>
-                    <p class="change-sign">Create a new account</p>
+                    <p class="change_sign">Create a new account</p>
                 </form>
             </div>     
         </div>
-        <div class="sign-container">
-            <div class="form-container">
+        <div class="sign_container">
+            <div class="form_container">
                 <form id="signup">
-                    <h3 class="form-title">Create account
-                        <div class="close-btn">✕</div>
+                    <h3 class="form_title">Create an account
                     </h3>
-                    <div class="form-content">
+                    <div class="form_content">
                         <input type="text" placeholder="Type Name" name="name" required>
                         <input type="email" placeholder="Type Email" name="email" required>
                         <input type="password" placeholder="Type Password" name="password" required>
                         <button type="submit">Sign up</button>
                     </div>
                     <p class="message"></p>
-                    <p class="change-sign">Sign in account</p>
+                    <p class="change_sign">Already have an account? Sign in</p>
                 </form>
             </div>     
         </div>
     </Section>
-    <div class="up-seperator"></div>
-    <div class="form-join">
-        <form id="joinroom">
+    <!-- <div class="form_join"> -->
+        <!-- <form id="joinroom">
             <div>
                 <label>Enter room id</label>
-                <input type="text" name="room" required>
+                <input type="text" name="room" >
                 <button type="submit">Join</button>
             </div>
-        </form>
-        <form>
-            <input type="text" name="search" placeholder="輸入景點名稱查詢">
-            <button type="submit"><i class="fas fa-search"></i></button>
-        </form>
-        <form action="/video">
+        </form> -->
+        <!-- <form action="/video">
             <button type="click">video</button>
-        </form>
-    </div>
+        </form> -->
+    <!-- </div> -->
 
-    <script src="/static/js/sign.js"></script>
-    <script src="/static/js/joinroom.js"></script>
+    <script src="/static/js/signin.js"></script>
+    <!-- <script src="/static/js/joinroom.js"></script> -->
 
 </body>
 </html>

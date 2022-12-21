@@ -4,24 +4,94 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">  -->
     <link href="/static/css/chat.css" rel="stylesheet" type="text/css"  />
     <title>Simplemeet</title>
 </head>
 <body>
-    <h1 class="welcome">Welcome to Simplemeet room <span id="room_id"></span></h1>
-
-    <div id="messages"></div>
-
-    <div class="button_container">
-        <form class="input_form" id="message_input_form">
-            <input type="text" id="message_input" placeholder="Enter your message">
-            <button type="submit">Send</button>
-        </form>
-        <button id="leave_button" type="click">Leave Room</button>
+    <div class="Allsection">
+        <div class="section_option">
+            <button class="section_option_user"type="click"><i class="fa-solid fa-user"></i></button>
+            <button class="section_option_chat"type="click"><i class="fa-solid fa-comment-dots"></i></button>
+            <button class="section_option_join"type="click"><i class="fa-solid fa-plus"></i></button>
+        </div>
+        <div class="section_content">
+            <div class="section_content_friend_search" >
+                <form id="firend_search">
+                    <input type="text" name="search" placeholder="Type email to search firend">
+                    <button type="submit"><i class="fas fa-search"></i></button>
+                </form>
+                <div class="friend_search">
+                    <p id="friend_name"></p>
+                    <button id="join_friend_button" type="click"><i class="fa-solid fa-plus"></i></button>
+                </div>
+                <p id="join_friend_message"></p>
+            </div>
+            <div class="section_content_friend_list_container">
+                <div class="section_content_friend_list">
+                    <div class="friend_list_user">
+                        <img class="user_img" src="" >
+                        <p class="user_name"></p>
+                    </div>
+                    <div class="friend_list_title">Friend List</div>
+                    <div class="friend_list_friendname">
+                    </div>
+                </div> 
+            </div>
+        </div>
+        <div>
+            <div id="signout_btn" ><i class="fa-solid fa-door-open"></i></div>
+        </div>
+        <div class="section_message">
+            <!-- <form id="message_search">
+                <input type="text" name="message_search" placeholder="Type history message to search">
+                <button type="submit"><i class="fas fa-search"></i></button>
+            </form> -->
+            <div id="messages">
+            </div>
+            <div class="button_container">
+                <form class="input_form" id="message_input_form">
+                    <input type="text" id="message_input" placeholder="Enter your message">
+                    <img class="emoji" src="https://d2xfotk02kb3rl.cloudfront.net/emoji.png">
+                    <button type="submit"><i class="fa-solid fa-paper-plane"></i></button>
+                </form>
+            </div>
+        </div>
+        <div class="form_memberdata">
+            <h3 class="form_title">Member Profile</h3>
+            <div class="member_img_content">
+                <img class="member_img" src="">
+            </div>
+            <div class="form-file" id="file" >
+                <input type="file" id="select_file" accept="image/*" >
+            </div>
+            <button type="click" id="member_img_change_btn">更換大頭貼</button>
+            <form id="member_data">
+                <p id="member_name"></p>
+                <p id="member_email"></p>
+                <div class="form_content">
+                    <div>New name：  
+                    <input type="text" placeholder="Type New Name" name="name" required>
+                    </div>
+                    <div>New password：
+                    <input type="password" placeholder="Type New Password" name="password" required>
+                    </div>
+                    <button type="submit">Save</button>
+                </div>
+                <p class="message"></p>
+            </form>
+        </div>
+        <div class="background show">
+            <img class="background_img" src="https://d2xfotk02kb3rl.cloudfront.net/background.png">
+        </div>
     </div>
 </body>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"></script>
+<script src="https://kit.fontawesome.com/647c2fadc1.js" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/@joeattardi/emoji-button@3.0.3/dist/index.min.js"></script>
 <script src="../static/js/socket.js"></script>
+<script src="/static/js/friend.js"></script>
+<script src="/static/js/signout.js"></script>
+<script src="/static/js/member.js"></script>
+
 </html>
