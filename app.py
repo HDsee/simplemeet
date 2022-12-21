@@ -2,12 +2,12 @@ from flask import *
 from flask_socketio import SocketIO, join_room, leave_room,emit,send
 
 #import api
-from api.user import userApi 
-from api.joinroom import joinroomApi
-from api.member import memberApi
-from api.member import friendApi
-from api.member import messageApi
-from api.member import imgApi
+from controller.user_route import userApi
+from controller.joinroom_route import joinroomApi
+from controller.friend_route import friendApi
+from controller.message_route import messageApi
+from controller.member_route import memberApi
+from controller.member_route import imgApi
 
 app = Flask(__name__)
 socketio = SocketIO(app, cors_allowed_origins="*")
@@ -16,12 +16,12 @@ app.config["TEMPLATES_AUTO_RELOAD"]=True
 app.config["JSON_SORT_KEYS"] = False #阻止json按照字母排序
 
 #註冊blueprint
-app.register_blueprint(userApi, url_prefix='/api')
-app.register_blueprint(joinroomApi, url_prefix='/api')
-app.register_blueprint(memberApi, url_prefix='/api')
-app.register_blueprint(friendApi, url_prefix='/api')
-app.register_blueprint(messageApi, url_prefix='/api')
-app.register_blueprint(imgApi, url_prefix='/api')
+app.register_blueprint(userApi)
+app.register_blueprint(joinroomApi)
+app.register_blueprint(memberApi)
+app.register_blueprint(friendApi)
+app.register_blueprint(messageApi)
+app.register_blueprint(imgApi)
 
 app.secret_key="HD"
 # Pages
@@ -42,33 +42,6 @@ def chat():
     return render_template('chat.html')
 
 users = {}
-
-# @socketio.on('send_message' )
-# def handle_send_message_event(data):
-#     app.logger.info("{} has sent message to the room {}: {}".format(data['username'],data['room'],data['message']))
-#     socketio.emit('receive_message', data, room=data['room'])
-
-# @socketio.on('join_room')
-# def handle_join_room_event(data):
-#     app.logger.info("{} has joined the room {}".format(data['username'], data['room']))
-#     join_room(data['room'])
-#     users[session['user']] = request.sid
-#     print(users)
-    # socketio.emit('join_room_announcement', data, room=data['room'])
-
-# @socketio.on('leave_room')
-# def handle_leave_room_event(data):
-#     app.logger.info("{} has left the room {}".format(data['username'], data['room']))
-#     leave_room(data['room'])
-#     socketio.emit('leave_room_announcement', data, room=data['room']) 
-
-# @socketio.on('disconnect')
-# def disconnect():
-#     del users[session['user']]
-#     print(users,'OK')
-# 	app.logger.info("{} has disconnect {}".format(session['user'], session['room']))
-#     disconnect(data)
-#     socketio.emit('leave_room_announcement', data, room=session['room'])
 
 @socketio.on('message from user', namespace='/messages')
 def receive_message_from_user(message):
