@@ -101,7 +101,7 @@ function getfriend(){
         .then(data => {
             UserImg.src=userimg
             UserName.innerText = username
-
+            console.log(data)
             if (data) {
                 FriendListFriendname.innerHTML = ''
                 const friends = data.data.frined

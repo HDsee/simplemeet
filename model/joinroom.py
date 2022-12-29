@@ -11,7 +11,7 @@ load_dotenv()
 
 class joinroom:
     #取得當前房間資訊
-    def roomData():
+    def roomStatus():
         # 房間登入中
         if "room" in session:
             room = session['room']

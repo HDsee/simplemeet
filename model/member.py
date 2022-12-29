@@ -8,7 +8,6 @@ import boto3
 from dotenv import load_dotenv
 import os
 
-
 load_dotenv()
 rdsHost = os.getenv("rdsHost")
 rdsDatabease = os.getenv("rdsDatabase")
@@ -74,7 +73,6 @@ class member:
                 cursor.execute('select * from `member` where email=%s',(email,))
                 user = cursor.fetchone()
                 if ( user ):
-                    print(user[1])
                     data = {
                         "user": user[1],
                         "email": email,
@@ -94,7 +92,8 @@ class member:
                 }
                 return jsonify(data), 400
         # 伺服器錯誤
-        except :
+        except Exception as e:
+            print(e)
             data = {
                 "error": True,
                 "message": "伺服器內部錯誤"

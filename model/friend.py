@@ -1,9 +1,8 @@
 from flask import *
 from flask import session
-from connector import connection_pool
+from connector import connection_pool,redisDb
 
 import re
-
 
 class friend:
     #好友資料取得
@@ -12,17 +11,36 @@ class friend:
             email = session['email']
             db = connection_pool.get_connection()
             cursor = db.cursor()
-            cursor.execute('select friendname,friendimg from `friends` where email=%s ',(email,))
-            friend = cursor.fetchall()
-            # 好友資料查詢
-            if friend :
+            try:
+                getRedisData = json.loads(redisDb.get(email))
+                # 好友資料查詢
+                if getRedisData != None:
+                    data = {
+                    "data":{"frined":getRedisData}
+                    }
+                    print(getRedisData)
+                    return jsonify(data),200
+                else:
+                    cursor.execute('select friendname,friendimg from `friends` where email=%s ',(email,))
+                    friend = cursor.fetchall()
+                    data = {
+                    "data":{"frined":friend}
+                    }
+                    jsonFriendData = json.dumps(friend)
+                    redisDb.set(email, jsonFriendData, ex=300)
+                    print(jsonFriendData)
+                    return jsonify(data),200
+
+            except Exception as e:
+                print(e)
+                cursor.execute('select friendname,friendimg from `friends` where email=%s ',(email,))
+                friend = cursor.fetchall()
                 data = {
                 "data":{"frined":friend}
                 }
-                return jsonify(data)
-            # 沒有好友
-            data = {"data": None}
-            return jsonify(data)
+                jsonFriendData = json.dumps(friend)
+                redisDb.set(email, jsonFriendData, ex=300)
+                return jsonify(data), 200
 
         # 伺服器錯誤
         except Exception as e:
