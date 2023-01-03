@@ -16,9 +16,9 @@ class friend:
                 # 好友資料查詢
                 if getRedisData != None:
                     data = {
-                    "data":{"frined":getRedisData}
+                    "data":{"frined":getRedisData,
+                            "redis":"OK"}
                     }
-                    print(getRedisData)
                     return jsonify(data),200
                 else:
                     cursor.execute('select friendname,friendimg from `friends` where email=%s ',(email,))
@@ -28,7 +28,6 @@ class friend:
                     }
                     jsonFriendData = json.dumps(friend)
                     redisDb.set(email, jsonFriendData, ex=300)
-                    print(jsonFriendData)
                     return jsonify(data),200
 
             except Exception as e:
@@ -72,6 +71,7 @@ class friend:
             if (not friend  ):
                 cursor.execute('INSERT INTO `friends` (email,name,friendemail,friendname,friendimg) VALUES (%s,%s,%s,%s,%s)',(email,name,friendemail,friendname,friendimg))
                 data = {"ok": True}
+                redisDb.delete(email)
                 return jsonify(data), 200
             # 好友重複
             elif (friend[0] == friendname):

@@ -24,7 +24,6 @@ function friendSearch(e){
     })
     .then(res => res.json())
     .then(data => {
-        console.log(data)
         if(data.user ){
             friendNameText.innerText = data.user
             friendName = data.user
@@ -33,7 +32,6 @@ function friendSearch(e){
             joinFriendBtn.classList.add('show')
         }
         else{
-            console.log(data)
             friendNameText.innerText = data.message
         }
     })
@@ -52,7 +50,6 @@ function joinfriend(e){
         name : friendName,
         img : friendImg
     }
-    console.log(data)
     fetch(friendApi, {
         method: 'POST',
         body: JSON.stringify(data),
@@ -101,7 +98,6 @@ function getfriend(){
         .then(data => {
             UserImg.src=userimg
             UserName.innerText = username
-            console.log(data)
             if (data) {
                 FriendListFriendname.innerHTML = ''
                 const friends = data.data.frined
@@ -146,7 +142,8 @@ function getfriend(){
                 .then(data => {
                     targetFriendImg = data.img
                     if(data.data){
-                        data.data.forEach( data => meshistory(data[0],data[1],data[2], data[3]) )
+                        data.data.forEach( data => meshistory(data[0],data[1],data[2], data[3]) ),
+                        messageContent.scrollTop = messageContent.scrollHeight
                     }
                     else{
                         console.log('None message')
@@ -162,9 +159,9 @@ function getfriend(){
 }
 
 //歷史訊息顯示
-function meshistory(historySneder, historyReceiver,historyMessage,historyTime){ 
+function meshistory(historySender, historyReceiver,historyMessage,historyTime){ 
     const time = historyTime.slice(-6,-4) + ':' +  historyTime.slice(-4,-2) + ':' + historyTime.slice(-2);
-    if(historySneder == username){
+    if(historySender == username){
         const sendContainer = document.createElement('div');
         sendContainer.classList.add('mes_user');
         sendContainer.classList.add('sender');
@@ -177,7 +174,7 @@ function meshistory(historySneder, historyReceiver,historyMessage,historyTime){
         senderImg.src=userimg
         const senderName = document.createElement('div');
         senderName.classList.add('mes_name');
-        senderName.innerHTML = `${historySneder}`;
+        senderName.innerHTML = `${historySender}`;
 
         const senderMes = document.createElement('div');
         senderMes.classList.add('mes_text');
@@ -209,7 +206,7 @@ function meshistory(historySneder, historyReceiver,historyMessage,historyTime){
         receiverImg.src=targetFriendImg
         const receiverName = document.createElement('div');
         receiverName.classList.add('mes_name');
-        receiverName.innerHTML = `${historyReceiver}`;
+        receiverName.innerHTML = `${historySender}`;
 
         const receiverMes = document.createElement('div');
         receiverMes.classList.add('mes_text');

@@ -1,7 +1,7 @@
-const socket = io.connect("http://127.0.0.1:3020");
-// const socket = io.connect("https://52.68.132.15:3020");
-// const socket = io.connect("https://hd.simplemeet.website");
-const privateSocket = io.connect("http://127.0.0.1:3020/private");
+// const socket = io.connect("http://127.0.0.1:3020");
+// const privateSocket = io.connect("http://127.0.0.1:3020/private");
+const socket = io.connect("https://hd.simplemeet.website");
+const privateSocket = io.connect("https://hd.simplemeet.website/private");
 
 const userApi = '/api/user'
 const joinroomApi = '/api/joinroom'
@@ -81,6 +81,9 @@ function message_send (e){
         sendContainer.appendChild(senderMes);
         sendContainer.appendChild(senderTime);
         messageContent.appendChild(sendContainer);
+
+        messageContent.scrollTop = messageContent.scrollHeight;
+
     }
 }
 messageForm.addEventListener('submit', message_send)
@@ -134,6 +137,8 @@ privateSocket.on('new_private_message', function(msg){
     receiveContainer.appendChild(receiverMes);
     receiveContainer.appendChild(receiverTime);
     messageContent.appendChild(receiveContainer);
+
+    messageContent.scrollTop = messageContent.scrollHeight
 })
 
 //emoji
