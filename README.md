@@ -2,7 +2,4 @@
 
 It's an instant messenger website that provides a live transmission of text messages to friends.
 
-
-
-https://user-images.githubusercontent.com/93437400/210403566-5c68f43b-b402-468d-a64a-b716a1deff42.mp4
-
+![test](https://user-images.githubusercontent.com/93437400/210403985-9515af54-e18e-4e3f-b613-829f60cc2584.gif)
