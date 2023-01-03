@@ -28,3 +28,16 @@ User can chat with friends in real-time or leave a message.
 
 ### Deployment
 * Docker
+
+### Environment
+* Python Flask
+
+### Database
+* MySQL
+* Redis(cache)
+
+### Cloud Service (AWS)
+* EC2
+* S3, CloudFront
+* RDS
+* ElastiCache
