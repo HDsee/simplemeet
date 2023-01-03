@@ -41,3 +41,10 @@ User can chat with friends in real-time or leave a message.
 * S3, CloudFront
 * RDS
 * ElastiCache
+* Route 53
+
+### Networking
+* HTTP & HTTPS
+* Domain Name System
+* NGINX
+* SSL
