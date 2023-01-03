@@ -23,3 +23,8 @@ User can chat with friends in real-time or leave a message.
 * Use AWS ElastiCache to improve loading speed for user's friend list.
 * Convert domain name to IP with AWS Route 53.
 * Use Nginx to redirect HTTP to HTTPS.
+
+## Backend Technique
+
+### Deployment
+* Docker
