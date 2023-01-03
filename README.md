@@ -48,3 +48,14 @@ User can chat with friends in real-time or leave a message.
 * Domain Name System
 * NGINX
 * SSL
+
+### Version Control
+* Git/GitHub
+
+### Design Pattern
+* MVC
+
+### Front-End Technique
+* HTML
+* CSS
+* JavaScript
