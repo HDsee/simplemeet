@@ -24,6 +24,10 @@ User can chat with friends in real-time or leave a message.
 * Convert domain name to IP with AWS Route 53.
 * Use Nginx to redirect HTTP to HTTPS.
 
+## System Architecture
+![system](https://user-images.githubusercontent.com/93437400/210485986-de26db95-f66b-47b8-bd03-c1f834e46520.png)
+
+
 ## Backend Technique
 
 ### Deployment
