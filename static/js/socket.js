@@ -109,36 +109,38 @@ messageForm.addEventListener('submit', message_store)
 
 //接收即時訊息
 privateSocket.on('new_private_message', function(msg){
-    const receiveContainer = document.createElement('div');
-    receiveContainer.classList.add('mes_user');
-    receiveContainer.classList.add('receiver');
+    if (targetFriend == msg.username){
+        const receiveContainer = document.createElement('div');
+        receiveContainer.classList.add('mes_user');
+        receiveContainer.classList.add('receiver');
 
-    const receiverContent = document.createElement('div');
-    receiverContent.classList.add('mes_content');
-    const receiverImgContent = document.createElement('div');
-    receiverImgContent.classList.add('mes_img_content');
-    const receiverImg = document.createElement('img');
-    receiverImg.src=targetFriendImg
-    const receiverName = document.createElement('div');
-    receiverName.classList.add('mes_name');
-    receiverName.innerHTML = `${msg.username}`;
+        const receiverContent = document.createElement('div');
+        receiverContent.classList.add('mes_content');
+        const receiverImgContent = document.createElement('div');
+        receiverImgContent.classList.add('mes_img_content');
+        const receiverImg = document.createElement('img');
+        receiverImg.src=targetFriendImg
+        const receiverName = document.createElement('div');
+        receiverName.classList.add('mes_name');
+        receiverName.innerHTML = `${msg.username}`;
 
-    const receiverMes = document.createElement('div');
-    receiverMes.classList.add('mes_text');
-    const receiverTime = document.createElement('div');
-    receiverTime.classList.add('mes_time');
-    receiverMes.innerHTML = `${msg.mes}`;
-    receiverTime.innerHTML = `${time}`;
+        const receiverMes = document.createElement('div');
+        receiverMes.classList.add('mes_text');
+        const receiverTime = document.createElement('div');
+        receiverTime.classList.add('mes_time');
+        receiverMes.innerHTML = `${msg.mes}`;
+        receiverTime.innerHTML = `${time}`;
 
-    receiverImgContent.appendChild(receiverImg);
-    receiverContent.appendChild(receiverImgContent);
-    receiverContent.appendChild(receiverName);
-    receiveContainer.appendChild(receiverContent);
-    receiveContainer.appendChild(receiverMes);
-    receiveContainer.appendChild(receiverTime);
-    messageContent.appendChild(receiveContainer);
+        receiverImgContent.appendChild(receiverImg);
+        receiverContent.appendChild(receiverImgContent);
+        receiverContent.appendChild(receiverName);
+        receiveContainer.appendChild(receiverContent);
+        receiveContainer.appendChild(receiverMes);
+        receiveContainer.appendChild(receiverTime);
+        messageContent.appendChild(receiveContainer);
 
-    messageContent.scrollTop = messageContent.scrollHeight
+        messageContent.scrollTop = messageContent.scrollHeight
+    }
 })
 
 //emoji
