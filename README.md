@@ -1,10 +1,10 @@
-# simplemeet
+# [simplemeet](https://hd.simplemeet.website/)
 
 It's an instant messenger website that provides a live transmission of text messages to friends.
 
 ## Demo
 
-Website URL : https://hd.simplemeet.website/chat
+Website URL : https://hd.simplemeet.website/
 
 Test account:
 * User : 123@outlook.com
