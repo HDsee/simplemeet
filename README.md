@@ -13,7 +13,6 @@ Test account:
 ## Real-time chat
 
 User can chat with friends in real-time or leave a message.
-![test](https://user-images.githubusercontent.com/93437400/210403985-9515af54-e18e-4e3f-b613-829f60cc2584.gif)
 ![hacyn-rhni3](https://user-images.githubusercontent.com/93437400/211187622-d2695e6f-f2e5-41b3-bdbe-619bfc2a4a5a.gif)
 
 
