@@ -3,6 +3,8 @@ from flask import session
 from connector import connection_pool
 import re
 import boto3
+import redis
+import json
 
 # 讀取.env的隱藏資料
 from dotenv import load_dotenv
