@@ -18,12 +18,13 @@ User can chat with friends in real-time or leave a message.
 
 ## Main Features
 
-* Store user profile image in AWS S3 and use Cloud Front as CDN.
-* Use AWS RDS as Database and set index to optimize query.
-* Use Socket IO for real-time chat.
-* Use AWS ElastiCache to improve loading speed for user's friend list.
-* Convert domain name to IP with AWS Route 53.
-* Use Nginx to redirect HTTP to HTTPS.
+* Supported historical messages and emoji emoticons
+* Stored user profile image in AWS S3 and use Cloud Front as CDN.
+* Created AWS RDS as Database and set index to optimize query.
+* Used Socket IO for real-time chat.
+* Increased loading speed by friend list through AWS ElastiCache.
+* Converted domain name to IP with AWS Route 53.
+* Utilized Nginx to redirect HTTP to HTTPS.
 
 ## System Architecture
 ![system](https://user-images.githubusercontent.com/93437400/210485986-de26db95-f66b-47b8-bd03-c1f834e46520.png)
