@@ -47,6 +47,9 @@ User can chat with friends in real-time or leave a message.
 * S3, CloudFront
 * RDS
 * ElastiCache
+* Auto Scaling
+* Load Balance
+* Cloud Watch
 
 ### Networking
 * HTTP & HTTPS
